@@ -3,7 +3,12 @@ import React from "react"
 class Item extends React.Component {
 
   handleChangeOnCheck = () => {
-    this.props.whenChecked(this.props.done)
+    this.props.whenChecked(this.props.index)
+  }
+
+  handleRemoveToDo = (e) => {
+    e.preventDefault()
+    this.props.removeToDo(this.props.index)
   }
 
   render() {
@@ -13,9 +18,10 @@ class Item extends React.Component {
           <label>
             <input
               type="checkbox"
-              value={this.props.id}
+              checked={this.props.done}
               onChange={this.handleChangeOnCheck} />
             {this.props.text}
+            <button onClick={this.handleRemoveToDo}>Remove</button>
           </label>
         </form>
       </div>

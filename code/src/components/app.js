@@ -3,11 +3,16 @@ import Item from "./item"
 import NewItem from "./new-item"
 
 class App extends React.Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-      todo: []
+    if (localStorage.getItem("userToDos")) {
+      this.state = {
+        todo: JSON.parse(localStorage.getItem("userToDos"))
+      }
+    } else {
+      this.state = {
+        todo: []
+      }
     }
   }
 
@@ -18,15 +23,28 @@ class App extends React.Component {
       done: false,
       text: newText
     })
+    localStorage.setItem("userToDos", JSON.stringify(toDos))
     this.setState({
       todo: toDos
     })
   }
 
-  handleChecked = () => {
+  handleChecked = (index) => {
+    const toDo = this.state.todo
+    toDo[index].done = !toDo[index].done
+    localStorage.setItem("userToDos", JSON.stringify(toDo))
     this.setState({
-      done: !this.state.done
+      todo: toDo
     })
+  }
+
+  handleRemove = (index) => {
+    const toDo = this.state.todo
+    toDo.splice(index, 1)
+    this.setState({
+      todo: toDo
+    })
+    localStorage.setItem("userToDos", JSON.stringify(toDo))
   }
 
   render() {
@@ -34,12 +52,14 @@ class App extends React.Component {
       <div>
         <h1>To do App</h1>
         <NewItem onSubmit={this.handleNewItem} />
-        {this.state.todo.map((item) => {
+        {this.state.todo.map((item, index) => {
           return <Item
+            index={index}
             key={item.id}
             text={item.text}
             done={item.done}
-            whenChecked={this.handleChecked} />
+            whenChecked={this.handleChecked}
+            removeToDo={this.handleRemove} />
         })}
       </div>
     )
