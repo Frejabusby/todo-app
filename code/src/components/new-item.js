@@ -1,4 +1,5 @@
 import React from "react"
+import "./new-item.css"
 
 class NewItem extends React.Component {
 
@@ -18,17 +19,21 @@ class NewItem extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.onSubmit(this.state.newItem)
+    this.setState({
+      newItem: ""
+    })
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className="form-section">
+        <form className="new-item-form" onSubmit={this.handleSubmit}>
           <input
             type="text"
+            placeholder="Enter task"
             value={this.state.newItem}
             onChange={this.handleChange} />
-          <button>Add</button>
+          <button>+</button>
         </form>
       </div>
     )
