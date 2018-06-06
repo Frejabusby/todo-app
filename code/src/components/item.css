@@ -5,12 +5,12 @@
 
 .task-section:nth-child(odd) {
   background-color: #efefef;
-  border-left: 5px solid #ef9ea2;
+  border-left: 5px solid #c3701d;
 }
 
 .task-section:nth-child(even) {
   background-color: #f3f3f3;
-  border-left: 5px solid #fbd3d4;
+  border-left: 5px solid #ffa647;
 }
 
 .remove {
@@ -57,7 +57,7 @@
   width: 25px;
   height: 25px;
   margin-right: 20px;
-  background-color: #ef9da2;
+  background-color: #c3701d;
   border-radius: 50px;
 }
 
@@ -74,13 +74,13 @@
 }
 
 .task-form input[type="checkbox"] {
- display: none;
+  display: none;
 }
 
 .task-form input[type="checkbox"] ~ .checkbox::after {
-    content: none;
+  opacity: 0.2;
 }
 
 .task-form input[type="checkbox"]:checked ~ .checkbox::after {
-    content: "";
+  opacity: 1;
 }

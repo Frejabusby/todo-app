@@ -51,7 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="todo-section">
-        <h1>Things to do</h1>
+        <h1>To-Do list</h1>
         <NewItem onSubmit={this.handleNewItem} />
         {this.state.todo.map((item, index) => {
           return <Item
